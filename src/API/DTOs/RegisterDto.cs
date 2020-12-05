@@ -1,4 +1,4 @@
-namespace src.API.DTOs
+namespace API.DTOs
 {
     /// <summary>
     /// The base API controller.

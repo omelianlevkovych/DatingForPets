@@ -12,7 +12,8 @@ namespace API.Data
         /// Initializes a new instance of the <see cref="DataContext"/> class.
         /// </summary>
         /// <param name="options">Database context options.</param>
-        public DataContext(DbContextOptions options) : base(options)
+        public DataContext(DbContextOptions options)
+        : base(options)
         {
         }
 
