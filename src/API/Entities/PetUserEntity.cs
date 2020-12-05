@@ -12,7 +12,7 @@ namespace API.Entities
         /// Gets or sets the pet user identifier.
         /// </summary>
         public int Id { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the pet user name.
         /// </summary>

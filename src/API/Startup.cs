@@ -16,15 +16,26 @@ using Microsoft.OpenApi.Models;
 
 namespace API
 {
+    /// <summary>
+    /// The startup configuration class.
+    /// </summary>
     public class Startup
     {
         private readonly IConfiguration config;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Startup"/> class.
+        /// </summary>
+        /// <param name="config">The configuration.</param>
         public Startup(IConfiguration config)
         {
             this.config = config;
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// Registers asp.net services.
+        /// </summary>
+        /// <param name="services">The services collection.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(options =>
@@ -39,7 +50,11 @@ namespace API
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Configures the application request-response pipeline with middlewares.
+        /// </summary>
+        /// <param name="app">The application builder.</param>
+        /// <param name="env">The web host environment.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

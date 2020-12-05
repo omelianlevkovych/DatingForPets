@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>API</name>
+    </assembly>
+    <members>
+        <member name="T:src.API.Controllers.AccountController">
+            <summary>
+            The account controller.
+            </summary>
+        </member>
+        <member name="M:src.API.Controllers.AccountController.#ctor(API.Data.DataContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:src.API.Controllers.AccountController"/> class.
+            </summary>
+            <param name="dbContext">The database context.</param>
+        </member>
+        <member name="M:src.API.Controllers.AccountController.Register(src.API.DTOs.RegisterDto)">
+            <summary>
+            Register the pet user.
+            </summary>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="M:src.API.Controllers.AccountController.UserExists(System.String)">
+            <summary>
+            Look up the user.
+            </summary>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="T:src.API.Controllers.BaseApiController">
+            <summary>
+            The base API controller.
+            </summary>
+        </member>
+        <member name="T:src.API.DTOs.RegisterDto">
+            <summary>
+            The base API controller.
+            </summary>
+        </member>
+        <member name="P:src.API.DTOs.RegisterDto.Username">
+            <summary>
+            Gets or sets the user name.
+            </summary>
+        </member>
+        <member name="P:src.API.DTOs.RegisterDto.Password">
+            <summary>
+            Gets or sets password.
+            </summary>
+        </member>
+        <member name="T:API.Controllers.PetsController">
+            <summary>
+            The pets controller.
+            </summary>
+        </member>
+        <member name="M:API.Controllers.PetsController.#ctor(API.Data.DataContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:API.Controllers.PetsController"/> class.
+            </summary>
+            <param name="dbContext">The database context.</param>
+        </member>
+        <member name="M:API.Controllers.PetsController.GetPetsAsync">
+            <summary>
+            Returns the pets list.
+            </summary>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="M:API.Controllers.PetsController.GetPetAsync(System.Int32)">
+            <summary>
+            Returns the pet by it identifier.
+            </summary>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="T:API.Data.DataContext">
+            <summary>
+            The data context.
+            </summary>
+        </member>
+        <member name="M:API.Data.DataContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:API.Data.DataContext"/> class.
+            </summary>
+            <param name="options">Database context options.</param>
+        </member>
+        <member name="P:API.Data.DataContext.PetUsers">
+            <summary>
+            Gets or sets the pet users.
+            </summary>
+        </member>
+        <member name="M:API.Data.Migrations.RenamePetToPetUserEntity.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc/>
+        </member>
+        <member name="T:API.Entities.PetUserEntity">
+            <summary>
+            The application pet user entity.
+            </summary>
+        </member>
+        <member name="P:API.Entities.PetUserEntity.Id">
+            <summary>
+            Gets or sets the pet user identifier.
+            </summary>
+        </member>
+        <member name="P:API.Entities.PetUserEntity.Name">
+            <summary>
+            Gets or sets the pet user name.
+            </summary>
+        </member>
+        <member name="P:API.Entities.PetUserEntity.PasswordHash">
+            <summary>
+            Gets or sets the pet password hash.
+            </summary>
+        </member>
+        <member name="P:API.Entities.PetUserEntity.PasswordSault">
+            <summary>
+            Gets or sets the pet password sault.
+            </summary>
+        </member>
+    </members>
+</doc>

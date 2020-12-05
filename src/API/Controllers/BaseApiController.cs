@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace src.API.Controllers
+namespace API.Controllers
 {
     /// <summary>
     /// The base API controller.

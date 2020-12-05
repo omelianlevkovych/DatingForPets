@@ -2,12 +2,12 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using API.Data;
+using API.DTOs;
 using API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using src.API.DTOs;
 
-namespace src.API.Controllers
+namespace API.Controllers
 {
     /// <summary>
     /// The account controller.
@@ -24,10 +24,11 @@ namespace src.API.Controllers
         {
             this.dbContext = dbContext;
         }
-        
+
         /// <summary>
         /// Register the pet user.
         /// </summary>
+        /// <param name="registerDto">The register dto.</param>
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         [HttpPost("register")]
         public async Task<ActionResult<PetUserEntity>> Register(RegisterDto registerDto)
