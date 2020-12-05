@@ -1,33 +1,47 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using src.API.Controllers;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class PetsController : ControllerBase
+    /// <summary>
+    /// The pets controller.
+    /// </summary>
+    public class PetsController : BaseApiController
     {
-        private readonly DataContext context;
-        public PetsController(DataContext context)
+        private readonly DataContext dbContext;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PetsController"/> class.
+        /// </summary>
+        /// <param name="dbContext">The database context.</param>
+        public PetsController(DataContext dbContext)
         {
-            this.context = context;
+            this.dbContext = dbContext;
         }
 
+        /// <summary>
+        /// Returns the pets list.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Pet>>> GetPetsAsync()
+        public async Task<ActionResult<IEnumerable<PetUserEntity>>> GetPetsAsync()
         {
-            return await context.Pets.ToListAsync();
+            return await dbContext.PetUsers.ToListAsync();
         }
 
+        /// <summary>
+        /// Returns the pet by it identifier.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<Pet>> GetPetAsync(int id)
+        public async Task<ActionResult<PetUserEntity>> GetPetAsync(int id)
         {
-            return await context.Pets.FindAsync(id);
+            return await dbContext.PetUsers.FindAsync(id);
         }
     }
 }
