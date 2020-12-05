@@ -45,7 +45,7 @@ namespace API.Controllers
             {
                 Name = registerDto.Username.ToLower(),
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-                PasswordSault = hmac.Key
+                PasswordSault = hmac.Key,
             };
 
             dbContext.PetUsers.Add(petUser);
