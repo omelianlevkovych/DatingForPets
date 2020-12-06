@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Data;
 using API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,6 +28,7 @@ namespace API.Controllers
         /// Returns the pets list.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PetUserEntity>>> GetPetsAsync()
         {
@@ -38,6 +40,7 @@ namespace API.Controllers
         /// </summary>
         /// <param name="id">The pet identifier.</param>
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<PetUserEntity>> GetPetAsync(int id)
         {
