@@ -10,103 +10,103 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-  /// <summary>
-  /// The account controller.
-  /// </summary>
-  public class AccountController : BaseApiController
-  {
-    private readonly DataContext dbContext;
-    private readonly ITokenService tokenService;
-
     /// <summary>
-    /// Initializes a new instance of the <see cref="AccountController"/> class.
+    /// The account controller.
     /// </summary>
-    /// <param name="dbContext">The database context.</param>
-    /// <param name="tokenService">The token service.</param>
-    public AccountController(
-        DataContext dbContext,
-        ITokenService tokenService)
-        {
-            this.tokenService = tokenService;
-            this.dbContext = dbContext;
-        }
-
-    /// <summary>
-    /// Registers the pet user.
-    /// </summary>
-    /// <param name="registerDto">The register dto.</param>
-    /// <returns>A <see cref="PetUserEntity"/> representing the new created pet user.</returns>
-    [HttpPost("register")]
-    public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
+    public class AccountController : BaseApiController
     {
-        if (await UserExists(registerDto.Username))
+        private readonly DataContext dbContext;
+        private readonly ITokenService tokenService;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountController"/> class.
+        /// </summary>
+        /// <param name="dbContext">The database context.</param>
+        /// <param name="tokenService">The token service.</param>
+        public AccountController(
+            DataContext dbContext,
+            ITokenService tokenService)
+            {
+                this.tokenService = tokenService;
+                this.dbContext = dbContext;
+            }
+
+        /// <summary>
+        /// Registers the pet user.
+        /// </summary>
+        /// <param name="registerDto">The register dto.</param>
+        /// <returns>A <see cref="PetUserEntity"/> representing the new created pet user.</returns>
+        [HttpPost("register")]
+        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
-        return BadRequest("User name is already taken");
+            if (await UserExists(registerDto.Username))
+            {
+            return BadRequest("User name is already taken");
+            }
+
+            // Using the hash algorithm for secure saving the pet username (identity) and password into database.
+            using var hmac = new HMACSHA512();
+
+            var petUser = new PetUserEntity
+            {
+                Name = registerDto.Username.ToLower(),
+                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
+                PasswordSault = hmac.Key,
+            };
+
+            dbContext.PetUsers.Add(petUser);
+            await dbContext.SaveChangesAsync();
+
+            return new UserDto
+            {
+                Username = petUser.Name,
+                Token = tokenService.CreateToken(petUser),
+            };
         }
 
-        // Using the hash algorithm for secure saving the pet username (identity) and password into database.
-        using var hmac = new HMACSHA512();
-
-        var petUser = new PetUserEntity
+        /// <summary>
+        /// Logins the pet user.
+        /// </summary>
+        /// <param name="loginDto">The login dto.</param>
+        /// <returns>A <see cref="PetUserEntity"/> representing the logged in pet user.</returns>
+        [HttpPost("login")]
+        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            Name = registerDto.Username.ToLower(),
-            PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-            PasswordSault = hmac.Key,
-        };
+            var petUser = await dbContext.PetUsers
+            .SingleOrDefaultAsync(user => user.Name == loginDto.Username);
 
-        dbContext.PetUsers.Add(petUser);
-        await dbContext.SaveChangesAsync();
+            if (petUser == null)
+            {
+                return Unauthorized("Invalid username");
+            }
 
-        return new UserDto
-        {
-            Username = petUser.Name,
-            Token = tokenService.CreateToken(petUser),
-        };
-    }
+            using var hmac = new HMACSHA512(petUser.PasswordSault);
 
-    /// <summary>
-    /// Logins the pet user.
-    /// </summary>
-    /// <param name="loginDto">The login dto.</param>
-    /// <returns>A <see cref="PetUserEntity"/> representing the logged in pet user.</returns>
-    [HttpPost("login")]
-    public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
-    {
-        var petUser = await dbContext.PetUsers
-        .SingleOrDefaultAsync(user => user.Name == loginDto.Username);
+            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
 
-        if (petUser == null)
-        {
-            return Unauthorized("Invalid username");
+            // Verify whether if during login user has provided the correct password.
+            for (int i = 0; i < computedHash.Length; ++i)
+            {
+                if (computedHash[i] != petUser.PasswordHash[i])
+                    {
+                        return Unauthorized("Invalid password");
+                    }
+            }
+
+            return new UserDto
+            {
+                Username = petUser.Name,
+                Token = tokenService.CreateToken(petUser),
+            };
         }
 
-        using var hmac = new HMACSHA512(petUser.PasswordSault);
-
-        var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
-
-        // Verify whether if during login user has provided the correct password.
-        for (int i = 0; i < computedHash.Length; ++i)
+        /// <summary>
+        /// Look up the user.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
+        private async Task<bool> UserExists(string username)
         {
-            if (computedHash[i] != petUser.PasswordHash[i])
-                {
-                    return Unauthorized("Invalid password");
-                }
+            return await dbContext.PetUsers.AnyAsync(user => user.Name == username.ToLower());
         }
-
-        return new UserDto
-        {
-            Username = petUser.Name,
-            Token = tokenService.CreateToken(petUser),
-        };
     }
-
-    /// <summary>
-    /// Look up the user.
-    /// </summary>
-    /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
-    private async Task<bool> UserExists(string username)
-    {
-        return await dbContext.PetUsers.AnyAsync(user => user.Name == username.ToLower());
-    }
-  }
 }

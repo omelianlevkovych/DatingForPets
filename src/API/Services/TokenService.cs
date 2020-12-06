@@ -11,41 +11,41 @@ using Microsoft.IdentityModel.Tokens;
 namespace API.Services
 {
     /// <inheritdoc />
-  public class TokenService : ITokenService
-  {
-    private readonly SymmetricSecurityKey key;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="TokenService"/> class.
-    /// </summary>
-    /// <param name="config">The configuration.</param>
-    public TokenService(IConfiguration config)
+    public class TokenService : ITokenService
     {
-        key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
-    }
+      private readonly SymmetricSecurityKey key;
 
-    /// <inheritdoc />
-    public string CreateToken(PetUserEntity user)
-    {
-      var claims = new List<Claim>
+      /// <summary>
+      /// Initializes a new instance of the <see cref="TokenService"/> class.
+      /// </summary>
+      /// <param name="config">The configuration.</param>
+      public TokenService(IConfiguration config)
       {
-          new Claim(JwtRegisteredClaimNames.NameId, user.Name),
-      };
+          key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
+      }
 
-      var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-      var tokenDescriptor = new SecurityTokenDescriptor
+      /// <inheritdoc />
+      public string CreateToken(PetUserEntity user)
       {
-          Subject = new ClaimsIdentity(claims),
-          Expires = DateTime.UtcNow.AddDays(7),
-          SigningCredentials = credentials,
-      };
+        var claims = new List<Claim>
+        {
+            new Claim(JwtRegisteredClaimNames.NameId, user.Name),
+        };
 
-      var tokenHandler = new JwtSecurityTokenHandler();
+        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
-      var token = tokenHandler.CreateToken(tokenDescriptor);
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Subject = new ClaimsIdentity(claims),
+            Expires = DateTime.UtcNow.AddDays(7),
+            SigningCredentials = credentials,
+        };
 
-      return tokenHandler.WriteToken(token);
+        var tokenHandler = new JwtSecurityTokenHandler();
+
+        var token = tokenHandler.CreateToken(tokenDescriptor);
+
+        return tokenHandler.WriteToken(token);
+      }
     }
-  }
 }

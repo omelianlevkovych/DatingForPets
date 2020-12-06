@@ -7,17 +7,17 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace API.Extensions
 {
-  /// <summary>
-  /// The extension methods for application service.
-  /// </summary>
-  public static class ApplicationServiceExtensions
-  {
+    /// <summary>
+    /// The extension methods for application service.
+    /// </summary>
+    public static class ApplicationServiceExtensions
+    {
         /// <summary>
-        /// Adds the application services collection.
+        /// Adds the service to application services collection.
         /// </summary>
         /// <param name="services">The service collection.</param>
         /// <param name="config">The configuration.</param>
-        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
+        /// <returns>A <see cref="IServiceCollection"/>.</returns>
         public static IServiceCollection AddApplicationServices(
             this IServiceCollection services,
             IConfiguration config)
@@ -30,5 +30,5 @@ namespace API.Extensions
 
             return services;
         }
-  }
+    }
 }

@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-  /// <summary>
-  /// The pets controller.
-  /// </summary>
-  public class PetsController : BaseApiController
+    /// <summary>
+    /// The pets controller.
+    /// </summary>
+    public class PetsController : BaseApiController
     {
         private readonly DataContext dbContext;
 
