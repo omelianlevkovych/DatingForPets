@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\personal\\DatingForPets\\src\\api\\API.csproj": {}
+    "D:\\personal\\DatingForPets\\src\\API\\API.csproj": {}
   },
   "projects": {
-    "D:\\personal\\DatingForPets\\src\\api\\API.csproj": {
+    "D:\\personal\\DatingForPets\\src\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\personal\\DatingForPets\\src\\api\\API.csproj",
+        "projectUniqueName": "D:\\personal\\DatingForPets\\src\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "D:\\personal\\DatingForPets\\src\\api\\API.csproj",
+        "projectPath": "D:\\personal\\DatingForPets\\src\\API\\API.csproj",
         "packagesPath": "C:\\Users\\oml\\.nuget\\packages\\",
-        "outputPath": "D:\\personal\\DatingForPets\\src\\api\\obj\\",
+        "outputPath": "D:\\personal\\DatingForPets\\src\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

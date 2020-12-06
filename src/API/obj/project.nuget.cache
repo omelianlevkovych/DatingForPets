@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vAAPKqvCVvnrp9B/9YRQqk1RpOf7d5asSRHeBw0vAJXYEw1CFcOehpb+lYQ5Ev3xYNNLSPJ0snjUeqBa25DwOg==",
+  "dgSpecHash": "9BWjUxwzrjwm67QEHY9V+p0P0OskQOSBbiEHq4T7N4ZlO2TvSqWsublCbl1NELJqIQEM4KsMrKTYdvYqyzXIEw==",
   "success": true,
-  "projectFilePath": "D:\\personal\\DatingForPets\\src\\api\\API.csproj",
+  "projectFilePath": "D:\\personal\\DatingForPets\\src\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\oml\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\oml\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.0\\microsoft.aspnetcore.authentication.jwtbearer.5.0.0.nupkg.sha512",
