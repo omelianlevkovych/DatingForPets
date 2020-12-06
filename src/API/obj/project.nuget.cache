@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "r51Qnfyr7RWEIN+emARbnqG4Bu/BgqzjRye8dlsMrCI2ugeHfY9ocQ/ivaatyXWaIHZ/9jtEmyOJ6gXhUgJltw==",
+  "dgSpecHash": "EH7+o+Qzzi//KrKstDK6xBL+dCtcAtW2s0Xd3ql9jr1D9iEpcuMJF9vZYkbbAFELW7ak8azD9jHHASUT4lGWwQ==",
   "success": true,
-  "projectFilePath": "D:\\personal\\DatingForPets\\src\\API\\API.csproj",
+  "projectFilePath": "D:\\personal\\DatingForPets\\src\\api\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\oml\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\oml\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.0\\microsoft.aspnetcore.authentication.jwtbearer.5.0.0.nupkg.sha512",
@@ -38,6 +38,7 @@
     "C:\\Users\\oml\\.nuget\\packages\\sqlitepclraw.core\\2.0.4\\sqlitepclraw.core.2.0.4.nupkg.sha512",
     "C:\\Users\\oml\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.0.4\\sqlitepclraw.lib.e_sqlite3.2.0.4.nupkg.sha512",
     "C:\\Users\\oml\\.nuget\\packages\\sqlitepclraw.provider.dynamic_cdecl\\2.0.4\\sqlitepclraw.provider.dynamic_cdecl.2.0.4.nupkg.sha512",
+    "C:\\Users\\oml\\.nuget\\packages\\stylecop.analyzers\\1.1.118\\stylecop.analyzers.1.1.118.nupkg.sha512",
     "C:\\Users\\oml\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
     "C:\\Users\\oml\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
     "C:\\Users\\oml\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
