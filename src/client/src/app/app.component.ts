@@ -12,10 +12,9 @@ export class AppComponent implements OnInit {
   title = 'The pets daiting app';
   pets: any;
   // Dependency injection
-  constructor(private http: HttpClient, private accountService: AccountService) {}
+  constructor(private accountService: AccountService) {}
 
   ngOnInit() {
-    this.getUsers();
     this.setCurrentUser();
   }
   
@@ -23,14 +22,5 @@ export class AppComponent implements OnInit {
   setCurrentUser() {
     const user: User = JSON.parse(localStorage.getItem('user'));
     this.accountService.setCurrentUser(user);
-  }
-
-  // Retreiving the pet user list
-  getUsers() {
-    this.http.get('https://localhost:5001/api/pets').subscribe(response => {
-      this.pets = response;
-    }, error => {
-      console.log(error);
-    });
   }
 }
