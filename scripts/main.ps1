@@ -11,7 +11,7 @@ elseif ( $env -eq 2 ) {
     exit
 }
 else {
-    Write-Output "Plese input 1 or 2"
+    Write-Output "Please input 1 or 2"
     .\main.ps1
     exit
 }

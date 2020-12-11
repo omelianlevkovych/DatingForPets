@@ -3,8 +3,8 @@ param (
 )
 $item = Read-Host @"
 1: Get pet by id.
-2: Unavail
-3: Unavail
+2: Unavailable
+3: Unavailable
 Please select the task [1-3] 
 "@
 switch ($item)
