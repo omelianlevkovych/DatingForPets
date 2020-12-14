@@ -1,4 +1,4 @@
-Function getMenu($url)
+Function GetMenu([string]$urlDomain)
 {
     $item = Read-Host @'
 1: Get pet by id.
@@ -9,7 +9,7 @@ Please select the task [1-3]
                 switch ($item)
                 {
                     default { Write-Warning 'Please choose from given options' }
-                    '1' { getPet($url); break }
+                    '1' { GetPet($urlDomain); break }
                     '2' { 'You chose option #2' } 
                     '3' { 'You chose option #3' }
                 }

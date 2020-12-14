@@ -1,19 +1,19 @@
-Function getPet($url)
+Function GetPet([string]$urlDomain)
 {
     $pet_id = Read-Host 'Please enter Pet Id'
     $headers = @{
-        Authorization = "Bearer $env:TOKEN"
+        Authorization = "Bearer $accessToken"
     }
     try
     {
-        $response = Invoke-RestMethod -Uri $url/api/pets/$pet_id -Headers $headers -ContentType "application/json"
+        $response = Invoke-RestMethod -Uri $urlDomain/api/pets/$pet_id -Headers $headers -ContentType "application/json"
     }
     catch
     {  
         if (  $_.Exception.response.StatusCode -eq "Unauthorized" )
         {
             Write-Warning 'Token is expired, authorize to generate new one!'
-            authUser($url)
+            AuthUser($urlDomain)
             exit
         }
         else 

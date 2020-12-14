@@ -19,18 +19,18 @@ add-type @"
 "@
 [System.Net.ServicePointManager]::CertificatePolicy = New-Object TrustAllCertsPolicy
 
-$url = "https://localhost:5001"
+$urlDomain = "https://localhost:5001"
 while($true)
 {
     $env = Read-Host 'Do you want to use local[1] or external[2] environment?'
     if ( $env -eq 1 )
     {
-        getMenu($url)
+        GetMenu($urlDomain)
         exit
     }
     elseif ( $env -eq 2 ) {
-        $url = Read-Host 'Please input URL of external environment (e.g: https://127.0.0.1:5001)'
-        getMenu($url)
+        $urlDomain = Read-Host 'Please input URL of external environment (e.g: https://127.0.0.1:5001)'
+        GetMenu($urlDomain)
         exit
     }
     else {
