@@ -6,15 +6,16 @@ Function GetPet([string]$urlDomain)
     }
     try
     {
-        $response = Invoke-RestMethod -Uri $urlDomain/api/pets/$pet_id -Headers $headers -ContentType "application/json"
+        $response = Invoke-RestMethod -Uri $urlDomain/api/pets/$pet_id -Headers $headers -ContentType 'application/json'
+
     }
     catch
-    {  
-        if (  $_.Exception.response.StatusCode -eq "Unauthorized" )
+    {   
+        if ( $null -ne $_.Exception.response -and $_.Exception.response.StatusCode -eq 'Unauthorized' )
         {
             Write-Warning 'Token is expired, authorize to generate new one!'
             AuthUser($urlDomain)
-            exit
+            exit                
         }
         else 
         {

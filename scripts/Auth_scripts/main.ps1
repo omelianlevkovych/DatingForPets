@@ -1,12 +1,12 @@
 # Requires PSVersion 5.1.18362.1171
-. ".\auth.ps1"
-. ".\getpet.ps1"
-. ".\menu.ps1"
+. '.\auth.ps1'
+. '.\getpet.ps1'
+. '.\menu.ps1'
 
-Set-StrictMode -version 1.0
+Set-StrictMode -version 3.0
 
 # Ignore self-signed certificates
-add-type @"
+add-type @'
     using System.Net;
     using System.Security.Cryptography.X509Certificates;
     public class TrustAllCertsPolicy : ICertificatePolicy {
@@ -16,15 +16,15 @@ add-type @"
             return true;
         }
     }
-"@
+'@
 [System.Net.ServicePointManager]::CertificatePolicy = New-Object TrustAllCertsPolicy
 
-$urlDomain = "https://localhost:5001"
 while($true)
 {
     $env = Read-Host 'Do you want to use local[1] or external[2] environment?'
     if ( $env -eq 1 )
     {
+        $urlDomain = 'https://localhost:5001'
         GetMenu($urlDomain)
         exit
     }

@@ -16,20 +16,20 @@ Function AuthUser([string]$urlDomain)
             $response = Invoke-WebRequest -Uri $urlDomain/api/account/login -Method POST -Body $body -Headers $headers
         }
         catch
-        {
-            if (  $_.Exception.response.StatusCode -eq "Unauthorized" )
+        {   
+            if ( $null -ne $_.Exception.response -and $_.Exception.response.StatusCode -eq 'Unauthorized' )
             {
                 Write-Warning 'Incorrect username or password'
-                continue
+                continue                
             }
             else 
             {
                throw
             }
         }
-        break
+        break  
     }
-    Set-Variable -Name "accessToken" -Scope global -Value (($response.content | ConvertFrom-Json).token).ToString()
+    Set-Variable -Name 'accessToken' -Scope global -Value (($response.content | ConvertFrom-Json).token).ToString()
     # Call previous function
     &(Get-PSCallStack | Select-Object -Property *)[1].FunctionName $urlDomain
 }
