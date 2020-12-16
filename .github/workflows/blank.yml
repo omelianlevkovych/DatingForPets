@@ -14,6 +14,8 @@ jobs:
   backend:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    env: 
+      working-directory: src/API/
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -24,14 +26,18 @@ jobs:
             dotnet-version: 5.0.100-preview.2.20176.6
         
       - name: Build back end
-        run: dotnet build src/API/API.csproj
+        run: dotnet build
+        working-directory: ${{env.working-directory}}
         
       - name: Run tests on back end
-        run: dotnet test src/API/API.csproj
+        run: dotnet test
+        working-directory: ${{env.working-directory}}
         
   frontend:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    env: 
+      working-directory: src/client/
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -40,19 +46,15 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
-        
-      - name: Changing the directory
-        run: pushd src/client/
       
       - name: Install npm dependencies
         run: npm install
+        working-directory: ${{env.working-directory}}
         
       - name: Build the front end application
         run: npm build
+        working-directory: ${{env.working-directory}}
              
       - name: Run test on front end using karma
         run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
-          
-      - name: Changing the directory back
-        run: popd
-              
+        working-directory: ${{env.working-directory}}
