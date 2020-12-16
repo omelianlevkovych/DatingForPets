@@ -48,7 +48,7 @@ jobs:
         run: pushd src/client/
         
       - name: Build the front end application
-        run: npm build -- --prod
+        run: npm build
              
       - name: Run test on front end using karma
         run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI \
