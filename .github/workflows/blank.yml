@@ -40,12 +40,15 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
+      
+      - name: Install npm dependencies
+        run: npm install
         
       - name: Changing the directory
         run: pushd src/client/
         
       - name: Build the front end application
-        run: ng build
+        run: npm build -- --prod
              
       - name: Run test on front end using karma
         run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI \
