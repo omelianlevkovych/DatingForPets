@@ -52,9 +52,9 @@ jobs:
         working-directory: ${{env.working-directory}}
         
       - name: Build the front end application
-        run: npm build
+        run: npm run-script build
         working-directory: ${{env.working-directory}}
              
       - name: Run test on front end using karma
-        run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+        run: npm run test --watch=false --browsers=ChromeHeadless
         working-directory: ${{env.working-directory}}
