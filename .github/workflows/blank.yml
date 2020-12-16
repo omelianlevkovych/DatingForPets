@@ -46,7 +46,10 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
-      
+        
+      - name: Resolve the issue with Actions and Chrome
+        run: sudo apt-get update && sudo apt-get install -y libgbm-dev
+        
       - name: Install npm dependencies
         run: npm install
         working-directory: ${{env.working-directory}}
