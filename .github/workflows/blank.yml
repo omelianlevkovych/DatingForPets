@@ -39,12 +39,14 @@ jobs:
       - uses: actions/checkout@v2
         
       - name: Build front end
-        run: pushd src/client/ \
-             ng build \
-             popd
+        run: |
+          pushd src/client/
+          ng build \
+          popd
              
       - name: Run test on front end using karma
-        run:  pushd src/client/ \ 
-              npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI \
-              popd
+        run: | 
+          pushd src/client/ 
+          npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI \
+          popd
               
