@@ -51,7 +51,7 @@ jobs:
         run: npm build
              
       - name: Run test on front end using karma
-        run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI \
+        run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
           
       - name: Changing the directory back
         run: popd
