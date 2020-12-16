@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-dotnet@v1.7.2
         with: 
-            dotnet-version: 5.0 
+            dotnet-version: 5.0.100-preview.2.20176.6
         
       - name: Build back end
         run: dotnet build src/API/API.csproj
