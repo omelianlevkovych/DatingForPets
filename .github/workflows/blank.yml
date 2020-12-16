@@ -38,15 +38,15 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
         
-      - name: Build front end
-        run: |
-          pushd src/client/
-          ng build \
-          popd
+      - name: Changing the directory
+        run: pushd src/client/
+        
+      - name: Build the front end application
+        run: ng build
              
       - name: Run test on front end using karma
-        run: | 
-          pushd src/client/ 
-          npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI \
-          popd
+        run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI \
+          
+      - name: Changing the directory back
+        run: popd
               
