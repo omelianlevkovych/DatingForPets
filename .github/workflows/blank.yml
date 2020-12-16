@@ -19,6 +19,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v1.7.2
+        with: 
+            dotnet-version: 5.0 
         
       - name: Build back end
         run: dotnet build src/API/API.csproj
