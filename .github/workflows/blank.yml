@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  # Triggers the workflow on pull request events but only for the main branch
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a two jobs called "backend" and "frontend"
+  backend:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    env: 
+      working-directory: src/API/
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v1.7.2
+        with: 
+            dotnet-version: 5.0.101
+        
+      - name: Build back end
+        run: dotnet build
+        working-directory: ${{env.working-directory}}
+        
+      - name: Run tests on back end
+        run: dotnet test
+        working-directory: ${{env.working-directory}}
+        
+  frontend:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    env: 
+      working-directory: src/client/
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+              
+      - name: Install npm dependencies
+        run: npm install
+        working-directory: ${{env.working-directory}}
+        
+      - name: Build the front end application
+        run: npm run-script build
+        working-directory: ${{env.working-directory}}
+             
+#      - name: Run test on front end using karma
+#        run: npm run test --watch=false --browsers=ChromeHeadless
+#        working-directory: ${{env.working-directory}}
+#        Excluding Karma tests untill it's configured properly.
