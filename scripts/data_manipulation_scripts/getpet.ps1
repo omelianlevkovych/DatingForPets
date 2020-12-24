@@ -4,10 +4,10 @@ Function GetPet([string]$urlDomain)
     $headers = @{
         Authorization = "Bearer $accessToken"
     }
+
     try
     {
         $response = Invoke-RestMethod -Uri $urlDomain/api/pets/$pet_id -Headers $headers -ContentType 'application/json'
-
     }
     catch
     {   
@@ -15,12 +15,13 @@ Function GetPet([string]$urlDomain)
         {
             Write-Warning 'Token is expired, authorize to generate new one!'
             AuthUser($urlDomain)
-            exit                
+            exit
         }
         else 
         {
            throw
         }
-    }  
+    }
+
     Write-Output $response
 }

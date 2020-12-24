@@ -4,7 +4,7 @@
 . '.\menu.ps1'
 
 Set-StrictMode -version 3.0
-
+Set-Variable -Name 'accessToken' -Scope global -Value $null
 
 while($true)
 {
